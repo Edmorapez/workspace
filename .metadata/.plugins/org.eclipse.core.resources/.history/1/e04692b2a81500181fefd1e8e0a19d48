@@ -1,0 +1,19 @@
+package cliente;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+public class Main {
+
+	public static void main(String[] args) throws NumberFormatException, UnknownHostException, Exception {
+		// TODO Auto-generated method stub
+		conexCliente client = new conexCliente(
+                InetAddress.getByName(args[0]), 
+                Integer.parseInt(args[1]));
+        
+        System.out.println("\r\nConnected to: " + client.socket.getInetAddress());
+        client.start(); 
+
+	}
+
+}

@@ -1,0 +1,38 @@
+package cliente;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.util.Scanner;
+
+public class Main {
+	static Socket socket;
+    private static Scanner scanner;
+    static String mensajeR;
+	public static void main(String[] args) {
+		socket = new Socket("192.168.1.33", 5000);
+		scanner = new Scanner(System.in);
+		 String input;
+	        BufferedReader entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+	        while (true) {
+	            input = scanner.nextLine();
+	            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+	            out.println(input);
+	            out.flush();
+	            if(entrada.readLine()!=null){
+	            	mensajeR=entrada.readLine();
+	            	System.out.println("\r\nMessage from server : " + mensajeR);
+	            }else{
+	            	System.out.println("sin msg");
+	            }
+
+	}
+
+}

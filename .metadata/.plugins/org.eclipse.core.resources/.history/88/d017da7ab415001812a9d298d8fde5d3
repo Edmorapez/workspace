@@ -1,0 +1,48 @@
+package socket;
+import java.net.*;
+import java.util.Scanner;
+import java.io.*;
+public class conex {
+	
+	final int puerto =3000;
+	ServerSocket sc;
+	Socket clientesocket;
+	DataOutputStream salida;
+	String mensajeR;
+	private Scanner scanner;
+
+
+	public void initServer(){
+		BufferedReader entrada;
+		 String input;
+		 this.scanner = new Scanner(System.in);
+		try{
+			sc = new ServerSocket(puerto,100);
+			clientesocket= new Socket();
+			System.out.println("Esperando Conexion: \n");
+			clientesocket = sc.accept();
+			System.out.println("Un cliente se ha conectado.\n");
+			
+			PrintWriter out = new PrintWriter(clientesocket.getOutputStream(), true);
+			BufferedReader in = new BufferedReader(
+                    new InputStreamReader(
+                    clientesocket.getInputStream()));
+			String inputLine, outputLine;
+			
+			salida = new DataOutputStream(clientesocket.getOutputStream());
+			System.out.println("Confirmando conexion al cliente....\n");
+			salida.writeUTF(" conexion para salir escribe out....");
+			salida.flush();
+			
+			 while ((inputLine = in.readLine()) != null) {
+	             outputLine = inputLine;
+	             out.println(outputLine);
+	             if (outputLine.equals("Chao."))
+	                break;
+	        }
+
+		}catch(Exception e){
+			System.out.println("Error: "+e.getMessage());
+		}
+	}
+}

@@ -1,0 +1,29 @@
+package cliente;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.util.Scanner;
+
+public class conexCliente {
+	Socket socket;
+    private Scanner scanner;
+    conexCliente() throws Exception {
+        this.socket = new Socket("192.168.1.33", 5000);
+        this.scanner = new Scanner(System.in);
+    }
+   
+     void start() throws IOException {
+        String input;
+        while (true) {
+            input = scanner.nextLine();
+            PrintWriter out = new PrintWriter(this.socket.getOutputStream(), true);
+            out.println(input);
+            out.flush();
+        }
+    }   
+
+}

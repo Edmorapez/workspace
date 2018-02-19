@@ -1,0 +1,32 @@
+package cliente;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		conexCliente client;
+		String ip= "192.168.1.33";
+		try {
+			client = new conexCliente();
+			 System.out.println("\r\nConnected to: " + client.socket.getInetAddress());
+		        client.start(); 
+		      
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+       
+
+	}
+
+}

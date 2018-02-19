@@ -1,0 +1,36 @@
+package cliente;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.util.Scanner;
+
+public class conexCliente {
+	private Socket socket;
+    private Scanner scanner;
+    private conexCliente(InetAddress serverAddress, int serverPort) throws Exception {
+        this.socket = new Socket(serverAddress, serverPort);
+        this.scanner = new Scanner(System.in);
+    }
+    public static void main(String[] args) throws Exception {                       
+    	conexCliente client = new conexCliente(
+                InetAddress.getByName(args[0]), 
+                Integer.parseInt(args[1]));
+        
+        System.out.println("\r\nConnected to: " + client.socket.getInetAddress());
+        client.start();             
+    }
+     void start() throws IOException {
+        String input;
+        while (true) {
+            input = scanner.nextLine();
+            PrintWriter out = new PrintWriter(this.socket.getOutputStream(), true);
+            out.println(input);
+            out.flush();
+        }
+    }   
+
+}

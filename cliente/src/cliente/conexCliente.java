@@ -1,28 +1,37 @@
 package cliente;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class conexCliente {
-	
-	final String HOST = "localhost";
-	final int puerto =5000;
-	Socket sc;
-	DataOutputStream mensaje;
-	DataInputStream entrada;
-	public void iniCliente(){
-		try{
-			sc = new Socket( HOST , puerto );
-			mensaje = new DataOutputStream(sc.getOutputStream());
-			mensaje.writeUTF("hola que tal!!");
-			sc.close();
-
-
-
-		}catch(Exception e){
-			System.out.println("Error: "+e.getMessage());
-		}
-	}
+	Socket socket;
+    private Scanner scanner;
+    conexCliente() throws Exception {
+        this.socket = new Socket("192.168.1.33", 5000);
+        this.scanner = new Scanner(System.in);
+    }
+   
+     void start() throws IOException {
+        String input;
+        String mensajeR;
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        mensajeR=entrada.readLine();
+ 	    System.out.println("\r\nMensaje del servidor " + socket.getLocalAddress() + ": " + mensajeR);
+ 	    
+        while (true) {
+            input = scanner.nextLine();
+            PrintWriter out = new PrintWriter(this.socket.getOutputStream(), true);
+            out.println(input);
+            out.flush();
+          
+        	   mensajeR=entrada.readLine();
+        	   System.out.println("\r\nMensaje del servidor " + socket.getLocalAddress() + ": " + mensajeR);
+           
+        }
+    }   
 
 }

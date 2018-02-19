@@ -1,0 +1,44 @@
+package socket;
+import java.net.*;
+import java.io.*;
+public class conex {
+	
+	final int puerto =5000;
+	ServerSocket sc;
+	Socket so;
+	DataOutputStream salida;
+	String mensajeR;
+	String mensajeRecibido;
+	BufferedReader entrada;
+
+	public void initServer(){
+		
+		try{
+			sc = new ServerSocket(puerto);
+			while(true){
+			so= new Socket();
+			while(true){
+			System.out.println("Esperando Conexion: \n");
+			so = sc.accept();
+			System.out.println("Un cliente se ha conectado.\n");
+			msgsalida();
+			mensajeEnt();
+			}
+			}
+			//salida.writeUTF("Se recibio tu mensaje.n Terminando conexion...");
+			//salida.writeUTF("Gracias por conectarte, adios!");
+			//sc.close();
+
+		}catch(Exception e){
+			System.out.println("Error: "+e.getMessage());
+		}
+	}
+	public void msgsalida() throws IOException {   	
+	  salida = new DataOutputStream( so.getOutputStream());	  			  
+	  salida.writeUTF("\n server>> hola! :  \n"); 	 
+}
+	public void mensajeEnt () throws IOException{
+		entrada = new BufferedReader(new InputStreamReader(so.getInputStream()));
+		System.out.println(entrada);
+	}
+}
