@@ -29,7 +29,7 @@ public class conex {
 			   PrintWriter out = new PrintWriter(this.so.getOutputStream(), true);
 			    out.println("hola usuario: escribe un mensaje ");
 	            out.flush();
-	                         
+	            
 			entrada = new BufferedReader(new InputStreamReader(so.getInputStream()));
 			
 			System.out.println("Confirmando conexion al cliente....\n");

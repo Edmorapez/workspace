@@ -6,7 +6,7 @@ public class Main {
 		conex soc = new conex();
 		soc.initServer();
 
-      
-	}                          
+
+	}
 
 }

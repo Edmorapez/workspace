@@ -1,0 +1,2 @@
+java -jar serverExe.jar
+java -jar clienteExe.jar

@@ -9,7 +9,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		conexCliente client;
 		
-		try {                                  
+		try {
 			client = new conexCliente();
 			 System.out.println("\r\nConectado a: " + client.socket.getInetAddress());
 		        client.start(); 
